@@ -45,4 +45,13 @@ local plugins_combined = vim.list_extend(default_plugins_loaded, custom_plugins_
 print("Configuring lazy.nvim") -- Linha para depuração
 require('lazy').setup({
   spec = plugins_combined,
+  {
+    'matze/vim-move',
+    keys = {
+      { '<A-Down>',  '<Plug>MoveLineDown',   mode = { 'n', 'v' } },
+      { '<A-Up>',    '<Plug>MoveLineUp',     mode = { 'n', 'v' } },
+      { '<A-Right>', '<Plug>MoveHCharRight', mode = { 'n', 'v' } },
+      { '<A-Left>',  '<Plug>MoveHCharLeft',  mode = { 'n', 'v' } },
+    }
+  }
 })
