@@ -11,7 +11,7 @@ install_neovim() {
   sudo rm -rf ~/.config/nvim
  
   echo "Extraindo Neovim..."
-  echo tar -C  /opt -xzf ~/Downloads/nvim-linux64.tar.gz
+  tar -C  /opt -xzf ~/Downloads/nvim-linux64.tar.gz
 
 
   echo "Limpando arquivos temporários..."
@@ -19,6 +19,44 @@ install_neovim() {
 
 }
 
+install_font_firecode() {
+  cd ~/Downloads/
+  echo 'Baixando FiraCode by Nerd Fonts'
+  curl -LO https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/FiraCode.zip
+
+  echo 'Extraindo font Fira Code Nerd Font'
+  unzip ~/Downloads/FiraCode.zip -d ~/Downloads/FiraCode
+
+  echo 'Organizando fontes'
+  sudo mv ~/Downloads/FiraCode /usr/share/fonts/truetype/
+
+  echo 'Ajustando permissões...'
+  sudo chmod 644 /usr/share/fonts/truetype/FiraCode/*
+
+  echo 'Sincronizando fontes'
+  fc-cache -fv
+
+  echo 'Preparando fonte para uso'
+  FONT = 'FiraCode Nerd Font'
+
+  echo 'Localizando perfil de usuário'
+  DEFAULT_PROFILE_TERM = $(gsettings get org.gnome.Terminal.ProfileList default)
+
+  echo 'Filtrando perfil'
+  DEFAULT_PROFILE=${DEFAULT_PROFILE//\'/}
+  
+  echo 'Desativando fontes do sistema para o terminal padrão'
+  gsettings set \
+  "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${DEFAULT_PROFILE}/" \
+  use-system-font false
+  
+  echo 'Aplicando fonte ao perfil padrão do terminal'
+  gsettings set \
+  "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${DEFAULT_PROFILE}/" \
+  font "${FONT}"
+
+  echo 'Instalação de fontes concluída sucesso!'
+}
 
 configure_zsh() {
   

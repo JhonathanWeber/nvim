@@ -12,8 +12,6 @@ require('keymaps')
 require('autocmds')
 
 
-
-
 -- Configuração do clipboard
 vim.g.clipboard = {
   name = 'xclip',

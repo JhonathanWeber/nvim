@@ -12,6 +12,13 @@ require('keymaps')
 require('autocmds')
 
 
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    require("nvim-tree.api").tree.open()
+  end
+})
+
+
 -- Configuração do clipboard
 vim.g.clipboard = {
   name = 'xclip',
