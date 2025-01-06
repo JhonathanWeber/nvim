@@ -3,7 +3,12 @@
 ![ncode 1](https://github.com/user-attachments/assets/7f965663-a54e-4a95-8901-e7c879a1c866)
 
 #### Update!
-add theme full transparent required transparent in terminal
+- add theme full transparent required transparent in terminal
+- add FiraCode fonts to installation script
+- add keymap alt+up alt+down for move lines
+- resolved selection copy/past in insert mode
+- resolved bar color in middle terminal
+
 
 #### Powers
 

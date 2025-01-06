@@ -1,39 +1,50 @@
 return {
   {
-    "olimorris/onedarkpro.nvim",
-    priority = 100, -- Ensure it loads first
+    "folke/tokyonight.nvim",
+    priority = 100,
     config = function()
-      vim.cmd("colorscheme onedark")
-      -- Theme opacit
-      vim.api.nvim_create_autocmd("ColorScheme", {
+      -- Configuração do tema
+      require("tokyonight").setup({
+        style = "night",
+        transparent = true,
+        terminal_colors = true,
+        styles = {
+          sidebars = "transparent",
+          floats = "transparent",
+        }
+      })
+
+      -- Ativar o Tema
+      vim.cmd("colorscheme tokyonight")
+
+            -- Aplicar transparência
+      local function apply_transparency()
+        local highlights = {
+          "Normal",
+          "NonText",
+          "NormalNC",
+          "SignColumn",
+          "LineNr",
+          "NvimTreeNormal",
+          "NvimTreeNormalNC",
+          "NvimTreeEndOfBuffer",
+          "NvimTreeVertSplit",
+        }
+        for _, group in ipairs(highlights) do
+          vim.cmd(string.format("highlight %s ctermbg=none guibg=none", group))
+        end
+      end
+
+      -- Eventos para reaplicar ajustes
+      vim.api.nvim_create_autocmd({ "ColorScheme", "VimResized" }, {
         pattern = "*",
         callback = function()
-          vim.cmd("highlight Normal   ctermbg=none guibg=none")
-          vim.cmd("highlight NonText  ctermbg=none guibg=none")
-          vim.cmd("highlight NormalNC  ctermbg=none guibg=none")
-          vim.cmd("highlight SignColumn ctermbg=none guibg=none")
-          vim.cmd("highlight LineNr     ctermbg=none guibg=none")
-
-          vim.cmd("highlight NvimTreeNormal      ctermbg=none guibg=none")
-          vim.cmd("highlight NvimTreeNormalNC    ctermbg=none guibg=none")
-          vim.cmd("highlight NvimTreeEndOfBuffer ctermbg=none guibg=none")
-          vim.cmd("highlight NvimTreeVertSplit   ctermbg=none guibg=none")
+          apply_transparency()
         end,
       })
 
-      -- Forçar ao iniciar
-      vim.cmd("highlight Normal   ctermbg=none guibg=none")
-      vim.cmd("highlight NonText  ctermbg=none guibg=none")
-      vim.cmd("highlight NormalNC  ctermbg=none guibg=none")
-      vim.cmd("highlight SignColumn ctermbg=none guibg=none")
-      vim.cmd("highlight LineNr     ctermbg=none guibg=none")
-
-      vim.cmd("highlight NvimTreeNormal      ctermbg=none guibg=none")
-      vim.cmd("highlight NvimTreeNormalNC    ctermbg=none guibg=none")
-      vim.cmd("highlight NvimTreeEndOfBuffer ctermbg=none guibg=none")
-      vim.cmd("highlight NvimTreeVertSplit   ctermbg=none guibg=none")
-    end
+      -- Aplicar ao iniciar
+      apply_transparency()
+    end,
   },
-
-
 }

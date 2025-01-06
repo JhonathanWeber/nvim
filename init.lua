@@ -12,6 +12,13 @@ require('keymaps')
 require('autocmds')
 
 
+vim.cmd("set colorcolumn=")
+vim.cmd("highlight WinSeparator guibg=none guifg=none")
+vim.cmd("highlight VertSplit guibg=none guifg=none")
+vim.cmd("highlight StatusLine guibg=none guifg=none")
+vim.cmd("highlight StatusLineNC guibg=none guifg=none")
+
+
 vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
     require("nvim-tree.api").tree.open()
