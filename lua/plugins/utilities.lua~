@@ -18,7 +18,7 @@ return {
         terminal_mappings = true,
         persist_size = true,
         persist_mode = true,
-        direction = 'horizontal', -- Default direction, can be overridden per terminal
+        direction = 'vertical', -- Default direction, can be overridden per terminal
         display_name = "",
         close_on_exit = true,
         border = { '─', '│', '─', '│', '┌', '┐', '┘', '└' },
